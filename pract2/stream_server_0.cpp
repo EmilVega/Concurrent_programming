@@ -32,6 +32,7 @@
 char dummy[1];
 char buffer[80];
 int  quit_flag;
+int repeat_flag;
 //---------------------------------------
 int master_delay;
 //--------------------------------------
@@ -58,9 +59,9 @@ void transaction_0(void)                        //         TRANSACTION 0
      
     //    MOV  CAP [receiver], CAP[sender]                  sender-> receiver
     
-    receiver =random(10);         //  receiver
-    sender =random(10);           //  sender                      MOV A,B   content of B is move to A      
-    amount =random(15)-7;           // max transaction allowed =  +7  a  -7
+    receiver =message.receiver[0];         //  receiver
+    sender =message.sender[0];           //  sender                      MOV A,B   content of B is move to A      
+    amount =message.amount[0];          // max transaction allowed =  +7  a  -7
     
     local_capital[sender]= local_capital[sender] - amount;
     
@@ -90,22 +91,39 @@ void attend_stream_0(void)
   asigned_time=random(101)+100;     // minimo= 100ms,  max=200 ms  
   cout << endl;  
     
-  cout << "Executing stream " << winner;  
-  transaction_0();  
+  cout << "Executing stream " << winner<< endl ;  
+  
+      
     
-  get_circulatig_capital();  
+  //if (repeat_flag==0){
+  //    cout<< endl<< "TRANSACTION REPEATED"<<endl; 
+  //}else{
+  //    repeat_flag=0;
+  //}
+  
+  if (message.occupied[0]==1){
+    transaction_0();
+    message.occupied[0]=0;
+    get_circulatig_capital();  
     
-  Sleep(asigned_time); 
-    
-  cout <<endl << "the local capital is " << local_capital[winner]<< endl;
-  cout <<endl << "total transactions " << total_transactions << endl;  
+    Sleep(asigned_time); 
+  
+    cout <<endl << "The sender is " << message.sender[0] <<"     The receiver is " << message.receiver[0]<<endl;
+    cout <<endl << "the local capital is " << local_capital[winner]<< endl;
+    cout <<endl << "total transactions " << total_transactions << endl;  
                                              
-  cout << endl<< "end stream  " << winner; 
+    cout << endl<< "end stream  " << winner; 
+      
+  }else{
+    cout<<endl<<"TRANSACTION NOT DONE" << endl; 
+  }  
+  
+  
     
   Sleep(master_delay);     //  to wacht in slow motion  
     
   Sleep(1000);  
-  //gets(dummy);     
+  gets(dummy);     
   cout << endl;     
 } 
 //---------------------------------------
@@ -114,50 +132,100 @@ void attend_stream_1(void)
  int asigned_time;
  int amount_1, receiver_1, sender;
     
-  cout << endl << "Executing stream " << winner;   
+  cout << endl << "Executing stream " << winner << endl;   
     
   asigned_time=random(100)+100;     // minimo= 10ms,  max=60 ms  
      
   amount_1= random(11)-5;  //    Cantidad a enviar entre 5 a -5
   receiver_1=random(10);
-  sender=1;   
+  sender=1;
+    
+  
 
-  if(!message.occupied[0]) cout <<endl << "ready to send " << amount_1;    
-
+  if(!message.occupied[0]){
+      
+      cout <<endl << "ready to send " << amount_1;
+      message.receiver[0]=receiver_1;
+      message.sender[0]=sender;
+      message.amount[0]=amount_1;
+      // repeat_flag=1;
+      message.occupied[0]=1;
+  } else{
+      cout<<endl<<"PENDING TRANSACTION"<<endl;
+  }
+  
   Sleep(asigned_time); 
   cout <<endl << "the local capital is " << local_capital[winner];
   cout << endl<< "end stream  " << winner; 
   Sleep(master_delay);     //  to wacht in slow motion  
   cout << endl;  
-  //gets(dummy);     
+  gets(dummy);     
 } 
 //---------------------------------------
 void attend_stream_2(void)
 {
  int asigned_time;
-
+ int amount_2, receiver_2;
+    
   asigned_time=random(100)+100;     // minimo= 10ms,  max=60 ms  
   cout << endl;  
-  cout << "Executing stream " << winner;  
-  Sleep(asigned_time); 
+  cout << "Executing stream " << winner<< endl;  
+   
+  
+  amount_2= random(11)-5;  //    Cantidad a enviar entre 5 a -5
+  receiver_2=random(10);
+    
+  if(!message.occupied[0]){
+      
+      cout <<endl << "ready to send " << amount_2;
+      message.receiver[0]=receiver_2;
+      message.sender[0]=2;
+      message.amount[0]=amount_2;
+      // repeat_flag=1;
+      message.occupied[0]=1;
+  } else{
+      cout<<endl<<"PENDING TRANSACTION"<<endl;
+  }
+  
+  Sleep(asigned_time);
+      
   cout <<endl << "the local capital is " << local_capital[winner];
   cout << endl<< "end stream  " << winner; 
   Sleep(master_delay);     //  to wacht in slow motion  
-  cout << endl;     
+  cout << endl;
+  gets(dummy);  
 } 
 //---------------------------------------
 void attend_stream_3(void)
 {
  int asigned_time;
+ int amount_3, receiver_3;
 
   asigned_time=random(100)+100;     // minimo= 10ms,  max=60 ms  
   cout << endl;  
-  cout << "Executing stream " << winner;  
+  cout << "Executing stream " << winner<<endl;
+
+  amount_3= random(11)-5;  //    Cantidad a enviar entre 5 a -5
+  receiver_3=random(10);
+    
+  if(!message.occupied[0]){
+      
+      cout <<endl << "ready to send " << amount_3;
+      message.receiver[0]=receiver_3;
+      message.sender[0]=3;
+      message.amount[0]=amount_3;
+      // repeat_flag=1;
+      message.occupied[0]=1;
+  } else{
+      cout<<endl<<"PENDING TRANSACTION"<<endl;
+  }
+    
   Sleep(asigned_time); 
   cout <<endl << "the local capital is " << local_capital[winner];
   cout << endl<< "end stream  " << winner; 
   Sleep(master_delay);     //  to wacht in slow motion  
   cout << endl;     
+  gets(dummy);
 } 
 
 //----------------------------------------
