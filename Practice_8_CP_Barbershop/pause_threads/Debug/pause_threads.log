@@ -1,0 +1,10 @@
+﻿  barbero_OK_A.cpp
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(37): warning C4101: 'i': unreferenced local variable
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(70): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(88): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(86): warning C4101: 'dice': unreferenced local variable
+c:\users\admin\documents\prog concurrente emil\practice_8_cp_barbershop\pause_threads\barbero_ok_a.cpp(87): warning C4101: 'i': unreferenced local variable
+  pause_threads.vcxproj -> C:\Users\ADMIN\Documents\Prog Concurrente Emil\Practice_8_CP_Barbershop\Debug\pause_threads.exe
+  pause_threads.vcxproj -> C:\Users\ADMIN\Documents\Prog Concurrente Emil\Practice_8_CP_Barbershop\Debug\pause_threads.pdb (Full PDB)
